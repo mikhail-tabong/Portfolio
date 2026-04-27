@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { DM_Sans, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 
@@ -17,9 +17,9 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mikhail-tabong.github.io/'),
   title: 'Mikhail "Kyle" Tabong | Data & Compliance Analyst',
   description: 'Mikhail (Kyle) Tabong — Financial Crimes Compliance Analyst at Protiviti. Portfolio of data analytics, ML, and ETL projects.',
-  themeColor: '#00FFA3',
   openGraph: {
     title: 'Mikhail "Kyle" Tabong | Portfolio',
     type: 'website',
@@ -29,6 +29,10 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#00FFA3',
 };
 
 export default function RootLayout({
