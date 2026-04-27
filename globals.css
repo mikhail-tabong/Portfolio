@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════
+   GLOBAL RESETS & BASE
+═══════════════════════════════════════ */
+html {
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #080A0E;
+  color: #E2EAF8;
+  overflow-x: clip;
+}
+
+::selection {
+  background: #00FFA3;
+  color: #000;
+}
+
+/* ═══════════════════════════════════════
+   ATMOSPHERIC BACKGROUND
+═══════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 65% 55% at 8% 5%, rgba(0,255,163,.045) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 45% at 92% 95%, rgba(77,158,255,.035) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 35% at 50% 50%, rgba(0,255,163,.012) 0%, transparent 70%);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(0,255,163,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,163,.018) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.show {
+  opacity: 1;
+  transform: none;
+}
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .18s; }
+.reveal-delay-3 { transition-delay: .26s; }
+.reveal-delay-4 { transition-delay: .34s; }
+
+/* ═══════════════════════════════════════
+   HERO ANIMATIONS
+═══════════════════════════════════════ */
+.hero-photo-anim {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: hero-slide-in .7s ease .3s forwards;
+}
+
+.hero-text-anim > * {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: hero-child-in .5s ease forwards;
+}
+.hero-text-anim > *:nth-child(1) { animation-delay: .45s; }
+.hero-text-anim > *:nth-child(2) { animation-delay: .57s; }
+.hero-text-anim > *:nth-child(3) { animation-delay: .68s; }
+.hero-text-anim > *:nth-child(4) { animation-delay: .80s; }
+.hero-text-anim > *:nth-child(5) { animation-delay: .92s; }
+
+@keyframes hero-slide-in {
+  to { opacity: 1; transform: none; }
+}
+@keyframes hero-child-in {
+  to { opacity: 1; transform: none; }
+}
+
+/* photo border glow */
+.photo-shell::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 10px;
+  background: linear-gradient(140deg, #00FFA3 0%, transparent 50%, #4D9EFF 100%);
+  z-index: 0;
+  animation: border-glow 4s ease-in-out infinite alternate;
+}
+@keyframes border-glow {
+  0% { opacity: .7; }
+  100% { opacity: 1; filter: drop-shadow(0 0 8px rgba(0,255,163,.35)); }
+}
+
+/* ═══════════════════════════════════════
+   NAV ANIMATIONS
+═══════════════════════════════════════ */
+.nav-anim {
+  transform: translateY(-100%);
+  animation: nav-drop .5s ease .2s forwards;
+}
+@keyframes nav-drop {
+  to { transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════
+   STATUS DOT PULSE
+═══════════════════════════════════════ */
+.status-dot {
+  animation: pulse-dot 2.5s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .45; transform: scale(.75); }
+}
+
+/* ═══════════════════════════════════════
+   REDUCED MOTION
+═══════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .hero-photo-anim, .hero-text-anim > * { opacity: 1 !important; transform: none !important; animation: none !important; }
+  .nav-anim { transform: none !important; animation: none !important; }
+  * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+
+/* ═══════════════════════════════════════
+   FOCUS STYLES
+═══════════════════════════════════════ */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #00FFA3;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
